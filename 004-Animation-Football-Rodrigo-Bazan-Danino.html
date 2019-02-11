@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html>
+<style>
+
+	#container {
+	  background-image: url("https://static.vecteezy.com/system/resources/previews/000/135/750/large_2x/football-ground-vector.png");
+	  background-size: cover; 
+	  width: 600px;
+	  height: 400px;
+	  position: relative;
+	  
+	}
+	#animate {
+	  width: 50px;
+	  height: 50px;
+	  border-radius: 25px;
+	  position: absolute;
+	  background-image: url('https://i.pinimg.com/originals/d8/61/fd/d861fd89ea55b25cbb416edbb1b5747f.jpg');
+	  background-size: cover;
+}
+
+</style>
+<body>
+
+<p>
+<button onclick="startMove()">Start</button>
+<button onclick="stopMove()">Stop</button>
+</p> 
+
+<div id ="container">
+	<div id ="animate">
+	</div>
+</div>
+
+<script>
+// Variablen global deklarieren
+var FlyingBox = document.getElementById("animate");  
+var	Container = document.getElementById("container");
+var TimerID;
+// Bewegung von links nach rechts
+var currPosX = 0;
+var LinksNachRechts = true;
+
+ // zuerst - links nach rechts, false für rechts nach links
+// Bewegung von oben nach unten
+var currPosY = 0;
+var ObenNachUnten = true; // zuerst - oben nach unten, false für unten nach oben
+
+// stoppt den Timer
+function stopMove() 
+{
+  clearInterval(TimerID);
+}
+
+//horizontal 
+function startMove() 
+{
+  stopMove();
+  TimerID = setInterval(MoveBallAll, 1);
+}
+
+function MoveBall() 
+{
+	if (LinksNachRechts == true) // Bewegung von links nach rechts 
+	{		
+		currPosX++; // 1 Pixel nach rechts
+		FlyingBox.style.left = currPosX + 'px'; 
+		// rechte Seite erreicht?
+		if(currPosX == Container.offsetWidth - FlyingBox.offsetWidth)
+		{
+			LinksNachRechts = false; // Richtung wechseln
+		} 
+	}
+	else // Bewegung von rechts nach links (!LinksNachRechts)
+	{	  
+		currPosX--; // 1 Pixel nach links
+		FlyingBox.style.left = currPosX + 'px'; 
+		// linke Seite erreicht?
+		if(currPosX == 0) LinksNachRechts = true;
+    } 
+}
+	
+function MoveBall2()	
+{
+	// TODO: Bewegung von oben nach unten
+	if (ObenNachUnten == true) // Bewegung von links nach rechts 
+	{		
+		currPosY++; // 1 Pixel nach rechts
+		FlyingBox.style.top = currPosY + 'px'; 
+		// rechte Seite erreicht?
+		if(currPosY == Container.offsetHeight - FlyingBox.offsetHeight)
+		{
+			ObenNachUnten = false; // Richtung wechseln
+		} 
+	}
+	else // Bewegung von rechts nach links (!LinksNachRechts)
+	{	  
+		currPosY--; // 1 Pixel nach links
+		FlyingBox.style.top = currPosY + 'px'; 
+		// linke Seite erreicht?
+		if(currPosY == 0) ObenNachUnten = true;
+    }
+} 
+
+function MoveBallAll() 
+{
+	MoveBall();
+	MoveBall2();
+}
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
